@@ -1,3 +1,11 @@
-# Professional README Generator Starter Code
 
-[How to create a Professional README](./readme-guide.md)
+    #projectTitle: blah
+    #projectEmail: blah@blah
+    #projectGithub: undefined
+    #projectLicense: 
+        GitHubLicense: HTTPS://img.shields.io/badge/license-MIT-blue.svg
+        
+   #license 
+        This project is licensed under MIT
+        
+    
