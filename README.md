@@ -7,7 +7,7 @@ SO THAT I can quickly create a professional README for a new project>
 This is a  _command-line_ application that accepts _user input_
 
 -WHEN prompted for information about my application repository
- a high-quality, professional ***README.md*** is generated with the _title_ of the project and sections entitled;
+ a high-quality, professional ***README*** is generated with the _title_ of the project and sections entitled;
   Description,
    Table of Contents, 
    Installation, 
@@ -26,7 +26,7 @@ followed by a _badge_
 
 WHEN github, email or Url Links are presented you are able to follow the link.
 
-The new ***README.md*** file is generated in its perspective folder (ie: the utils/dist)
+The new ***README*** file is generated in its perspective folder (ie: the utils/dist)
 
 **https://github.com/VSLG2020/ReadMeGenerator.git**
 Repository Link
