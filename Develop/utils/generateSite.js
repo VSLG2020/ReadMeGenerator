@@ -1,5 +1,5 @@
 const fs = require('fs');
-//const path = require('path');
+const {resolve} = require('path');
 
 
 const writeFile = fileContent => {
