@@ -7,10 +7,10 @@ function renderImage(images) {
         return " "
     }
 
-}
+};
 
 
-// If there is no license, return an empty string
+
 function renderLicenseBadge(badges) {
     if (badges !== 'None') {
         return `
@@ -19,21 +19,9 @@ function renderLicenseBadge(badges) {
     } else {
         return " "
     }
-}
+};
 
-// // TODO: Create a function that returns the license link
-// // If there is no license, return an empty string
-// function renderLicenseLink(license) {
-//     if(license !== 'None'){
-//         return `[alt text](https://github.com/${data.Username}/${data.Title})`
-//     }else{
-//         return " "
-//     }
 
-// }
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
 function renderLicenseSection(license) {
     if (license !== 'None') {
         return `#License 
@@ -54,44 +42,42 @@ function markdownGen(data) {
     ##Description
      ${data.description}
 
+    ##Table Of Contents
+     ${data.contentsTable}
+
     ##Install
     The Following Dependecies Are Required To Run The Application
      ${data.install}
-
-     ##Table Of Contents
-     ${data.contentsTable}
 
     ##Usage
     These Are Our Usage Terms 
      ${data.usage}
    
-    ##Tests
-    Downloaded Our Application? Run Some Tests:
-     ${data.tests}
-
     ##Languages
     Languages Used Are As Follows
      ${data.languages}
  
 
-     ##License
+    ##License
      ${renderLicenseSection(data.license)}
-
     
-    ##Collaborators 
-    Special Thanks To Our Team:
-     ${data.collaborators}
-    
-     #Github
+    ##Github
     Find Our Project On GitHub!
      ${data.github}
 
     ##Contributions
      ${data.contributors}
    
+    ##Tests
+    Downloaded Our Application? Run Some Tests:
+     ${data.tests}
    
     ##Images
      ${renderImage(data.images)}
+
+    ##Collaborators 
+    Special Thanks To Our Team:
+      ${data.collaborators}
 
     ##Badge
      ${renderLicenseBadge(data.badges)}
@@ -100,12 +86,26 @@ function markdownGen(data) {
    #Contact
    Questions or Inquiries, Please Contact Us At: 
    ${data.email}
-   `
-}
+   `;
+};
 
 
 
-module.exports = markdownGen
+module.exports = markdownGen;
 
 // ${renderLicenseLink(data.license)}
 // 
+
+// // TODO: Create a function that returns the license link
+// // If there is no license, return an empty string
+// function renderLicenseLink(license) {
+//     if(license !== 'None'){
+//         return `[alt text](https://github.com/${data.Username}/${data.Title})`
+//     }else{
+//         return " "
+//     }
+
+// }
+
+// TODO: Create a function that returns the license section of README
+// If there is no license, return an empty string

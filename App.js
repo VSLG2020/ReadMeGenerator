@@ -1,13 +1,13 @@
-const fs = require('fs');
 const inquirer = require('inquirer');
-const markdownGen = require('./Develop/utils/markdownGen');
+const fs = require('fs');
+const generateMarkdown = require('./Develop/utils/generateMarkdown');
 const generateSite = require('./Develop/utils/generateSite');
 //const { title } = require('process');
-const path = require('path');
+// const path = require('path');
 
 
 //inquirer to generate questions
-const promptQuestions = () => {
+const readmeReqs = () => {
     return inquirer
         .prompt([
 
@@ -83,6 +83,8 @@ const promptQuestions = () => {
                     new inquirer.Separator(),
                     "License",
                     new inquirer.Separator(),
+                    "Collaborators",
+                    new inquirer.Separator(),
                     "Github",
                     new inquirer.Separator(),
                     "Contribution",
@@ -90,7 +92,9 @@ const promptQuestions = () => {
                     "Images",
                     new inquirer.Separator(),
                     "Email",
-                    new inquirer.Separator()
+                    new inquirer.Separator(),
+                    "Badges",
+                    new inquirer.Separator(),
                 ],
               },
             {
@@ -212,23 +216,16 @@ const promptQuestions = () => {
 
 
 
-        ])
-        .then((promptData) => {
-
-            writeToFile("./Develop/utils/dist/README.md", markdownGen({ ...promptData }))
-            promptImage()
-
-
-        }
-        )
-};
-const promptImage = () => {
-    // console.log('ADD IMAGE LINK');
-    //  if (!imageData) {
-    //     // imageData = [];
-    // // }
-    return inquirer
-        .prompt([
+      
+        // )
+// };
+// const promptImage = () => {
+//     // console.log('ADD IMAGE LINK');
+//     //  if (!imageData) {
+//     //     // imageData = [];
+//     // // }
+//     return inquirer
+//         .prompt([
             {
                 type: "confirm",
                 name: "confirmImage",
@@ -247,8 +244,19 @@ const promptImage = () => {
                         return false;
                     }
                 }
-            },
+            }
+
+
         ])
+        // .then((promptData) => {
+
+        //     writeToFile("./Develop/utils/dist/README.md", generateMarkdown({ ...promptData }))
+        //     promptImage()
+
+
+        // },
+
+        // ])
     // .then(projectAssets => {
     //     imageData.push(projectAssets);
     //     if (projectAssets.images) {
@@ -261,25 +269,39 @@ const promptImage = () => {
 
 // };
 
-function writeToFile(fileName, data) {
-    return fs.writeFileSync(path.join(process.cwd(), fileName), data)
+// function writeToFile(fileName, data) {
+//     return fs.writeFileSync(path.join(process.cwd(), fileName), data)
+// }
+
+// promptQuestions()
+//     // .then(promptImage)
+//     .then(promptData => {
+//         return generateSite(promptData);
+//     })
+//     .then((promptData) => {
+//         writeToFile("./Develop/utils/dist/README.md", generateMarkdown({ ...promptData }).toString())
+//         console.log('Page Created Located Inside Of utils/dist folder!');
+//     }
+//     )
+//     .catch(err => {
+//         console.log(err);
+//     }
+//     );
+
+
+function App() {
+
 }
 
-promptQuestions()
-    // .then(promptImage)
-    .then(promptData => {
-        return generateSite(promptData);
-    })
-    .then((promptData) => {
-        writeToFile("./Develop/utils/dist/README.md", markdownGen({ ...promptData }).toString())
-        console.log('Page Created Located Inside Of utils/dist folder!');
-    }
-    )
-    .catch(err => {
-        console.log(err);
-    }
-    );
+// function call to initialize program
+App();
 
 
+readmeReqs()
+.then((promptData) => {
+    return generateMarkdown(promptData);
+})
 
-
+.then(pageMD => {
+    return generateSite(pageMD)
+})

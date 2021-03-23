@@ -1,8 +1,8 @@
 const fs = require('fs');
-const {resolve} = require('path');
+const path = require('path');
 
 
-const writeFile = fileContent => {
+const writeFile = (fileContent) => {
     return new Promise((resolve, reject) => {
       fs.writeFile('./Develop/utils/dist/README.md', (fileContent).toString(), err => {
         // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
