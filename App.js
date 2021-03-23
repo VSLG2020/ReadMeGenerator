@@ -296,12 +296,13 @@ function App() {
 // function call to initialize program
 App();
 
-
+// call questions
 readmeReqs()
+// then pass answers to generateMarkdown
 .then((promptData) => {
     return generateMarkdown(promptData);
 })
-
+// write MD file in dist folder
 .then(pageMD => {
     return generateSite(pageMD)
 })

@@ -35,55 +35,52 @@ function renderLicenseSection(license) {
 
 function markdownGen(data) {
     return `
+   # Title
+   ${data.title}
 
-    #Title
-     ${data.title}
+   ## Description
+   ${data.description}
 
-    ##Description
-     ${data.description}
+   ## Table Of Contents
+   ${data.contentsTable}
 
-    ##Table Of Contents
-     ${data.contentsTable}
+   ## Install
+   The Following Dependecies Are Required To Run The Application
+   ${data.install}
 
-    ##Install
-    The Following Dependecies Are Required To Run The Application
-     ${data.install}
-
-    ##Usage
-    These Are Our Usage Terms 
-     ${data.usage}
+   ## Usage
+   These Are Our Usage Terms 
+   ${data.usage}
    
-    ##Languages
-    Languages Used Are As Follows
-     ${data.languages}
+   ## Languages
+   Languages Used Are As Follows
+   ${data.languages}
  
-
-    ##License
-     ${renderLicenseSection(data.license)}
+   ## License
+   ${renderLicenseSection(data.license)}
     
-    ##Github
-    Find Our Project On GitHub!
-     ${data.github}
+   ## Github
+   Find Our Project On GitHub!
+   ${data.github}
 
-    ##Contributions
-     ${data.contributors}
+   ## Contributions
+   ${data.contributors}
    
-    ##Tests
-    Downloaded Our Application? Run Some Tests:
-     ${data.tests}
+   ## Tests
+   Downloaded Our Application? Run Some Tests:
+   ${data.tests}
    
-    ##Images
-     ${renderImage(data.images)}
+   ## Images
+   ${renderImage(data.images)}
 
-    ##Collaborators 
-    Special Thanks To Our Team:
-      ${data.collaborators}
-
-    ##Badge
-     ${renderLicenseBadge(data.badges)}
-
-
-   #Contact
+   ## Collaborators 
+   Special Thanks To Our Team:
+   ${data.collaborators}
+   
+   ## Badge
+   ${renderLicenseBadge(data.badges)}
+   
+   # Contact
    Questions or Inquiries, Please Contact Us At: 
    ${data.email}
    `;
