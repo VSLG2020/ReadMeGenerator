@@ -1,17 +1,17 @@
 
-    #projectTitle: Title
-    #projectDescription: description
-    #projectInstall: Install
-    #projectLanguages: JavaScript,HTML,CSS,ES6,jQuery,Bootstrap,Node
-    #projectEmail: gmail.com 
-    #projectGithub: github.com
+    #projectTitle: undefined
+    #projectDescription: undefined
+    #projectInstall: undefined
+    #projectLanguages: undefined
+    #projectEmail: undefined
+    #projectGithub: undefined
     #projectLicense: 
-        GitHubLicense: HTTPS://img.shields.io/badge/license-MIT-blue.svg
+        GitHubLicense: HTTPS://img.shields.io/badge/license-undefined-blue.svg
         
    #license 
-        This project is licensed under MIT
+        This project is licensed under undefined
         
    #projectImage: 
-        ![](undefined)
+        ![](N)
         
     

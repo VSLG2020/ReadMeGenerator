@@ -26,15 +26,15 @@ const promptQuestions = () => {
             },
             {
                 type: 'confirm',
-                name: 'confirmDescription',
-                message: ' You Must Enter A Description Regarding Your Project. Press Enter.',
+                name:'confirmDescription',
+                message: 'Please Confirm To Add A Description Of Your Project. (Required)',
                 default: true
             },
             {
                 type: 'input',
                 name: 'description',
-                message: 'Please Enter A Description of Your Project Here:',
-                when: ({ confirmDescription }) => confirmDescription,
+                message: 'Please Write A Description of Your Project Here:',
+                // when: ({ confirmDescription }) => confirmDescription,
                 validate: descriptionInput => {
                     if (descriptionInput) {
                         return true;
@@ -58,7 +58,7 @@ const promptQuestions = () => {
             {
                 type: 'checkbox',
                 name: 'languages',
-                message: 'What did you build this project with? (Check all that apply)',
+                message: 'What Language(s) Did You Use To Build This Project? (Check all that apply)',
                 choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
             },
             {
@@ -95,58 +95,66 @@ const promptQuestions = () => {
     ])
     .then((promptData) => {
      
-        writeToFile("README.md",markdownGen({...promptData})) 
-        promptImage()
+        writeToFile("./Develop/utils/dist/README.md",markdownGen({...promptData})) 
+         promptImage()
        
         
     }
     )
 };
-const promptImage = imageData => {
-    console.log('ADD IMAGE LINK');
-    // if (!imageData) {
-        imageData = [];
-    // }
+const promptImage = () => {
+    // console.log('ADD IMAGE LINK');
+    //  if (!imageData) {
+    //     // imageData = [];
+    // // }
     return inquirer
         .prompt([
             {
                 type: "confirm",
                 name: "confirmImage",
                 message: "Would You Like To Add Images To Your README.MD Description?",
-                default: false,
+                default: false
             },
             {
                 type: "input",
                 name: "images",
                 message: "Please Enter A Link To Your Image Here:",
-                when: ({ confirmImage }) => confirmImage,
+                validate: linkInput => {
+                    if (linkInput) {
+                      return true;
+                    } else {
+                      console.log('You need to enter a Image(s) link!');
+                      return false;
+                    }
+                  }
             },
         ])
-        .then(projectAssets => {
-            imageData.push(projectAssets);
-            if (projectAssets.images) {
-                return promptImage(imageData);
-            } else {
-                return imageData;
-            }
-        });
+        // .then(projectAssets => {
+        //     imageData.push(projectAssets);
+        //     if (projectAssets.images) {
+        //         return promptImage(imageData);
+        //     } else {
+        //         return imageData=[];
+        //     }
+        // });
+     };
 
-
-};
+// };
 
 function writeToFile(fileName, data){
     return fs.writeFileSync(path.join(process.cwd(),fileName), data)
 }
 
 promptQuestions()
-    // .then(promptImage)
-    .then(imageData => {
-        return generateSite(imageData);
-    })
+     .then(promptImage)
+    // .then(imageData => {
+    //     return generateSite(imageData);
+    // })
+
 
 
     .then((promptData) => {
-        writeToFile("README.md",markdownGen({...promptData}).toString()) 
+        writeToFile(".////README.md",markdownGen({...promptData}).toString()) 
     }
     )
     // .then((readmeFile) => {
@@ -161,3 +169,6 @@ promptQuestions()
     // function runApp() {}
 
     // runApp();
+
+
+    

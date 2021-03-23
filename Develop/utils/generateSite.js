@@ -1,5 +1,5 @@
 const fs = require('fs');
-// const path = require('path');
+//const path = require('path');
 
 
 const writeFile = fileContent => {
@@ -15,7 +15,7 @@ const writeFile = fileContent => {
         // if everything went well, resolve the Promise and send the successful data to the `.then()` method
         resolve({
           ok: true,
-          message: 'File created!'
+          message: 'File Created In Utils/dist!'
         });
       });
     });
