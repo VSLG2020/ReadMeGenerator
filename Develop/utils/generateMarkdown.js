@@ -32,7 +32,10 @@ function renderLicenseSection(license) {
     }
 };
 
-
+//markdown function organized in order of Readme preference.
+// # labels the importance
+// $ calls the responses generated from App.js "names" in function
+//everything must be aligned perfectly (no spaces) in order to create the css/link properties of md
 function markdownGen(data) {
     return `
    # Title

@@ -1,16 +1,13 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateMarkdown = require('./Develop/utils/generateMarkdown');
-const generateSite = require('./Develop/utils/generateSite');
-//const { title } = require('process');
-// const path = require('path');
+const generateMarkdown = require('./Develop/utils/generateMarkdown'); //markdown page with js function (working links)
+const generateSite = require('./Develop/utils/generateSite') //writeFile with writefile function
 
-
-//inquirer to generate questions
+//function of questions with confirm/input/validate options for the readme criteria.
 const readmeReqs = () => {
     return inquirer
-        .prompt([
-
+        .prompt([ 
+//title
             {
                 type: 'input',
                 name: 'title',
@@ -24,6 +21,7 @@ const readmeReqs = () => {
                     }
                 }
             },
+//description
             {
                 type: 'confirm',
                 name: 'confirmDescription',
@@ -43,6 +41,7 @@ const readmeReqs = () => {
                     }
                 }
             },
+//Install
             {
                 type: 'confirm',
                 name: 'confirmInstall',
@@ -62,6 +61,7 @@ const readmeReqs = () => {
                     }
                 }
             },
+// Table of Contents
             {
                 type: "confirm", 
                 name: "confirmContentsTable",
@@ -71,7 +71,7 @@ const readmeReqs = () => {
               {
                 type: "checkbox",
                 name: "contentsTable",
-                message: "Please Check All That Apply For Your Table Of Contents",
+                message: "Please Check All That Apply For Your Table Of Contents. (Press <space> to select, <a> to toggle all, <i> to invert selection)",
                 choices: [
                     "Installation",
                     new inquirer.Separator(),
@@ -97,6 +97,7 @@ const readmeReqs = () => {
                     new inquirer.Separator(),
                 ],
               },
+//Usage
             {
                 type: 'confirm',
                 name: 'confirmUsage',
@@ -106,7 +107,7 @@ const readmeReqs = () => {
             {
                 type: 'input',
                 name: 'usage',
-                message: 'Please Enter Your Projects Usage Description For The User',
+                message: 'Please Enter Your Projects Usage Description For The User. ',
                 validate: usageInput => {
                     if (usageInput) {
                         return true;
@@ -116,22 +117,24 @@ const readmeReqs = () => {
                     }
                 }
             },
+//languages
             {
                 type: 'checkbox',
                 name: 'languages',
-                message: 'What Language(s) Did You Use To Build This Project? (Check all that apply)',
+                message: 'What Language(s) Did You Use To Build This Project? ( (Press <space> to select, <a> to toggle all, <i> to invert selection))',
                 choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
             },
+//contribution
             {
                 type: 'confirm',
                 name: 'contributors',
-                message: 'Would You Like To Add How To Contribute To Your Project? ',
+                message: 'Would You Like To Add How To Contribute To Your Project?',
                 default: false
             },
             {
                 type: 'input',
                 name: 'contributorsInput',
-                message: 'Please Add All Contributing Preferences Here:',
+                message: 'Please Add All Contributing Preferences Here: Seperate Titles With -, Or Add Email/GH Link In A ( )',
                 validate: contributorsInput => {
                     if (contributorsInput) {
                         return true;
@@ -141,6 +144,7 @@ const readmeReqs = () => {
                     }
                 }
             },
+//tests
             {
                 type: 'confirm',
                 name: 'testsConfrim',
@@ -160,7 +164,7 @@ const readmeReqs = () => {
                     }
                 }
             },
-
+//email
             {
                 type: 'input',
                 name: 'email',
@@ -174,6 +178,7 @@ const readmeReqs = () => {
                     }
                 }
             },
+//github
             {
                 type: 'input',
                 name: 'github',
@@ -187,23 +192,24 @@ const readmeReqs = () => {
                     }
                 }
             },
+//license
             {
                 type: 'list',
                 name: 'license',
                 message: 'What is your license?',
                 choices: ['MIT', 'APACHE 2.0', 'GPL 3.0', 'BSD 3', 'None']
             },
-
+//collaborators
             {
                 type: 'confirm',
                 name: 'collaboratorsConfrim',
-                message: 'Would You Like To Include A List Of A/The Collaborator(s) for Your Project?',
+                message: 'Would You Like To Include A List Of A/The Collaborator(s) for Your Project? ',
                 default: false
             },
             {
                 type: 'input',
                 name: 'collaborators',
-                message: 'Please Provide A List Of Your Collaborator(s)',
+                message: 'Please Provide A List Of Your Collaborator(s) Here: Seperate Names With -, Or Add Email/GH Link In A [ ]',
                 validate: collaboratorsInput => {
                     if (collaboratorsInput) {
                         return true;
@@ -213,19 +219,7 @@ const readmeReqs = () => {
                     }
                 }
             },
-
-
-
-      
-        // )
-// };
-// const promptImage = () => {
-//     // console.log('ADD IMAGE LINK');
-//     //  if (!imageData) {
-//     //     // imageData = [];
-//     // // }
-//     return inquirer
-//         .prompt([
+//images
             {
                 type: "confirm",
                 name: "confirmImage",
@@ -235,7 +229,7 @@ const readmeReqs = () => {
             {
                 type: "input",
                 name: "images",
-                message: "Please Enter A Link To Your Image Here:",
+                message: "Please Enter A Link To Your Image Here: Please Add Img Url Inside ( )",
                 validate: linkInput => {
                     if (linkInput) {
                         return true;
@@ -248,47 +242,11 @@ const readmeReqs = () => {
 
 
         ])
-        // .then((promptData) => {
-
-        //     writeToFile("./Develop/utils/dist/README.md", generateMarkdown({ ...promptData }))
-        //     promptImage()
-
-
-        // },
-
-        // ])
-    // .then(projectAssets => {
-    //     imageData.push(projectAssets);
-    //     if (projectAssets.images) {
-    //         return promptImage(imageData);
-    //     } else {
-    //         return imageData=[];
-    //     }
-    // });
+    
 };
 
-// };
 
-// function writeToFile(fileName, data) {
-//     return fs.writeFileSync(path.join(process.cwd(), fileName), data)
-// }
-
-// promptQuestions()
-//     // .then(promptImage)
-//     .then(promptData => {
-//         return generateSite(promptData);
-//     })
-//     .then((promptData) => {
-//         writeToFile("./Develop/utils/dist/README.md", generateMarkdown({ ...promptData }).toString())
-//         console.log('Page Created Located Inside Of utils/dist folder!');
-//     }
-//     )
-//     .catch(err => {
-//         console.log(err);
-//     }
-//     );
-
-
+//function initializing
 function App() {
 
 }
@@ -296,13 +254,15 @@ function App() {
 // function call to initialize program
 App();
 
-// call questions
+//calling the questions {}
 readmeReqs()
-// then pass answers to generateMarkdown
+
+//this takes the answers to add to the Readme on generatesite file
 .then((promptData) => {
     return generateMarkdown(promptData);
 })
-// write MD file in dist folder
-.then(pageMD => {
-    return generateSite(pageMD)
+.then(writeToFile => {
+    return generateSite(writeToFile)
 })
+
+
