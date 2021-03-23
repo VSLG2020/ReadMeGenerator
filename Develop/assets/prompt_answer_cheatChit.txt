@@ -1,0 +1,56 @@
+VS Code 
+
+(free code editor)
+
+npm init
+npm install
+npm i inquirer
+
+create files 
+.gitignore 
+
+with :
+
+node_modules/ 
+DS_store/
+
+
+inside 
+
+
+Use or Follow Markdown Syntax for best rendering
+
+
+Usage Instructions:
+
+1.Open new terminal in project directory on your code editer
+2. Run the following function in the commandline
+- Node App.js
+3. You will be prompted with questions pertaining to creating the criteria for a ReadMe.md file
+
+4. Enter = Yes (by default)
+
+5. Open your new README.md file in the utils/dist folder
+6. Right click on file and select "Open Preview"
+
+links: 
+
+
+https://github.com/VSLG2020/ReadMeGenerator.git
+
+https://github.com/VSLG2020/ReadMeGenerator.git
+
+https://cash.app/
+https://www.paypal.com/us/home
+https://venmo.com/
+
+[TigerImage](Develop\assets\images\Tiger.50.jpg)
+
+
+lorem ipusm
+
+Cui cornua auget, non regat adhaeret delphines pater quid armis, tum poenae
+ignes. Tandem pars, miseris pharetraque tegit. Ferat Peneia garrulitas, cannis
+calamo, ter victarum, ad. Animo manus numero comminus dant quicquid, quod **ora
+siqua sedebat** lacusque tinxit. Erycina acies, non bellum in e fontis dixit sua
+me eveniet hoc altaria furta.

@@ -134,7 +134,7 @@ const readmeReqs = () => {
             {
                 type: 'input',
                 name: 'contributorsInput',
-                message: 'Please Add All Contributing Preferences Here: Seperate Titles With -, Or Add Email/GH Link In A ( )',
+                message: 'Please Add All Contributing Preferences Here:',
                 validate: contributorsInput => {
                     if (contributorsInput) {
                         return true;
@@ -229,7 +229,7 @@ const readmeReqs = () => {
             {
                 type: "input",
                 name: "images",
-                message: "Please Enter A Link To Your Image Here: Please Add Img Url Inside ( )",
+                message: "Please Enter A Link To Your Image Here: Please Include Url In ( ):",
                 validate: linkInput => {
                     if (linkInput) {
                         return true;
@@ -239,10 +239,7 @@ const readmeReqs = () => {
                     }
                 }
             }
-
-
-        ])
-    
+        ])  
 };
 
 

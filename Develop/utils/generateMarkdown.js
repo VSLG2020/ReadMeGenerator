@@ -1,7 +1,7 @@
 function renderImage(images) {
     if (images !== 'None') {
         return `
-        ![](${images})
+      ${images}
         `
     } else {
         return " "
