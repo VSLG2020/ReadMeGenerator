@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const markdownGen = require('./Develop/utils/markdownGen');
 const generateSite = require('./Develop/utils/generateSite');
 //const { title } = require('process');
-const {resolve} = require('path');
+const path = require('path');
 
 
 //inquirer to generate questions
@@ -74,14 +74,23 @@ const promptQuestions = () => {
                 message: "Please Check All That Apply For Your Table Of Contents",
                 choices: [
                     "Installation",
+                    new inquirer.Separator(),
                     "Usage",
+                    new inquirer.Separator(),
                     "Tests",
+                    new inquirer.Separator(),
                     "Languages",
+                    new inquirer.Separator(),
                     "License",
+                    new inquirer.Separator(),
                     "Github",
+                    new inquirer.Separator(),
                     "Contribution",
+                    new inquirer.Separator(),
                     "Images",
-                    "Email"
+                    new inquirer.Separator(),
+                    "Email",
+                    new inquirer.Separator()
                 ],
               },
             {
