@@ -6,8 +6,8 @@ const generateSite = require('./Develop/utils/generateSite') //writeFile with wr
 //function of questions with confirm/input/validate options for the readme criteria.
 const readmeReqs = () => {
     return inquirer
-        .prompt([ 
-//title
+        .prompt([
+            //title
             {
                 type: 'input',
                 name: 'title',
@@ -21,7 +21,7 @@ const readmeReqs = () => {
                     }
                 }
             },
-//description
+            //description
             {
                 type: 'confirm',
                 name: 'confirmDescription',
@@ -41,7 +41,7 @@ const readmeReqs = () => {
                     }
                 }
             },
-//Install
+            //Install
             {
                 type: 'confirm',
                 name: 'confirmInstall',
@@ -61,14 +61,14 @@ const readmeReqs = () => {
                     }
                 }
             },
-// Table of Contents
+            // Table of Contents
             {
-                type: "confirm", 
+                type: "confirm",
                 name: "confirmContentsTable",
                 message: "Would You Like To Add A Table Of Contents",
                 default: false
-              },
-              {
+            },
+            {
                 type: "checkbox",
                 name: "contentsTable",
                 message: "Please Check All That Apply For Your Table Of Contents. (Press <space> to select, <a> to toggle all, <i> to invert selection)",
@@ -83,11 +83,11 @@ const readmeReqs = () => {
                     new inquirer.Separator(),
                     "License",
                     new inquirer.Separator(),
-                    "Collaborators",
+                    "Credits",
                     new inquirer.Separator(),
                     "Github",
                     new inquirer.Separator(),
-                    "Contribution",
+                    "contribution",
                     new inquirer.Separator(),
                     "Images",
                     new inquirer.Separator(),
@@ -96,8 +96,8 @@ const readmeReqs = () => {
                     "Badges",
                     new inquirer.Separator(),
                 ],
-              },
-//Usage
+            },
+            //Usage
             {
                 type: 'confirm',
                 name: 'confirmUsage',
@@ -117,26 +117,26 @@ const readmeReqs = () => {
                     }
                 }
             },
-//languages
+            //languages
             {
                 type: 'checkbox',
                 name: 'languages',
                 message: 'What Language(s) Did You Use To Build This Project? ( (Press <space> to select, <a> to toggle all, <i> to invert selection))',
                 choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
             },
-//contribution
+            //contribution
             {
                 type: 'confirm',
-                name: 'contributors',
+                name: 'contribution',
                 message: 'Would You Like To Add How To Contribute To Your Project?',
                 default: false
             },
             {
                 type: 'input',
-                name: 'contributorsInput',
+                name: 'contributionInput',
                 message: 'Please Add All Contributing Preferences Here:',
-                validate: contributorsInput => {
-                    if (contributorsInput) {
+                validate: contributionInput => {
+                    if (contributionInput) {
                         return true;
                     } else {
                         console.log('Contributing Description Required.');
@@ -144,7 +144,7 @@ const readmeReqs = () => {
                     }
                 }
             },
-//tests
+            //tests
             {
                 type: 'confirm',
                 name: 'testsConfrim',
@@ -164,7 +164,7 @@ const readmeReqs = () => {
                     }
                 }
             },
-//email
+            //email
             {
                 type: 'input',
                 name: 'email',
@@ -178,7 +178,7 @@ const readmeReqs = () => {
                     }
                 }
             },
-//github
+            //github
             {
                 type: 'input',
                 name: 'github',
@@ -192,34 +192,34 @@ const readmeReqs = () => {
                     }
                 }
             },
-//license
+            //license
             {
                 type: 'list',
                 name: 'license',
                 message: 'What is your license?',
                 choices: ['MIT', 'APACHE 2.0', 'GPL 3.0', 'BSD 3', 'None']
             },
-//collaborators
+            //credits
             {
                 type: 'confirm',
-                name: 'collaboratorsConfrim',
+                name: 'creditsConfrim',
                 message: 'Would You Like To Include A List Of A/The Collaborator(s) for Your Project? ',
                 default: false
             },
             {
                 type: 'input',
-                name: 'collaborators',
+                name: 'credits',
                 message: 'Please Provide A List Of Your Collaborator(s) Here: Seperate Names With -, Or Add Email/GH Link In A [ ]',
-                validate: collaboratorsInput => {
-                    if (collaboratorsInput) {
+                validate: creditsInput => {
+                    if (creditsInput) {
                         return true;
                     } else {
-                        console.log('Project Collaborators Required.');
+                        console.log('Project Credits Required.');
                         return false;
                     }
                 }
             },
-//images
+            //images
             {
                 type: "confirm",
                 name: "confirmImage",
@@ -239,27 +239,23 @@ const readmeReqs = () => {
                     }
                 }
             }
-        ])  
+        ])
 };
-
 
 //function initializing
 function App() {
 
 }
-
 // function call to initialize program
 App();
-
 //calling the questions {}
 readmeReqs()
-
-//this takes the answers to add to the Readme on generatesite file
-.then((promptData) => {
-    return generateMarkdown(promptData);
-})
-.then(writeToFile => {
-    return generateSite(writeToFile)
-})
+    //this takes the answers to add to the Readme on generatesite file
+    .then((promptData) => {
+        return generateMarkdown(promptData);
+    })
+    .then(writeToFile => {
+        return generateSite(writeToFile)
+    })
 
 

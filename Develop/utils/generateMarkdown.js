@@ -9,6 +9,17 @@ function renderImage(images) {
 
 };
 
+function renderCredits(credits) {
+    if (credits !== 'None') {
+        return `
+      ${credits}
+        `
+    } else {
+        return " "
+    }
+
+};
+
 
 
 function renderLicenseBadge(badges) {
@@ -21,6 +32,16 @@ function renderLicenseBadge(badges) {
     }
 };
 
+function renderContributions(contributions) {
+    if (contributions !== 'None') {
+        return `
+      ${contributions}
+        `
+    } else {
+        return " "
+    }
+
+};
 
 function renderLicenseSection(license) {
     if (license !== 'None') {
@@ -67,7 +88,7 @@ function markdownGen(data) {
    ${data.github}
 
    ## Contributions
-   ${data.contributors}
+   ${renderContributions(data.contributions)}
    
    ## Tests
    Downloaded Our Application? Run Some Tests:
@@ -76,9 +97,9 @@ function markdownGen(data) {
    ## Images
    ${renderImage(data.images)}
 
-   ## Collaborators 
+   ## Credits 
    Special Thanks To Our Team:
-   ${data.collaborators}
+   ${renderCredits(data.credits)}
    
    ## Badge
    ${renderLicenseBadge(data.badges)}
