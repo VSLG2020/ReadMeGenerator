@@ -1,10 +1,10 @@
 
-    #projectTitle: fsjkjlkfsdljksdf
-    #projectDescription: skjdflfsd
-    #projectInstall: undefined
-    #projectLanguages: HTML
-    #projectEmail: dfkdk
-    #projectGithub: kdkddk
+    #projectTitle: Title
+    #projectDescription: Descp
+    #projectInstall: install
+    #projectLanguages: JavaScript
+    #projectEmail: email
+    #projectGithub: github
     #projectLicense: 
         GitHubLicense: HTTPS://img.shields.io/badge/license-MIT-blue.svg
         
