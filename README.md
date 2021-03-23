@@ -17,13 +17,19 @@ This is a  _command-line_ application that accepts _user input_
    Tests,
     and Languages.
 -WHEN _project title_ is entered
-this is displayed as the title of the **README**
+this is displayed as the title of the ***README***
 
--WHEN a [description, installation instructions, usage information, contribution guidelines, and test instructions] is entererd,  this information is added to the sections of the **README** entitled Description, Installation, Usage, Contributing, and Tests
+-WHEN a [description, installation instructions, usage information, contribution guidelines, and test instructions] is entererd,  this information is added to the sections of the ***README*** entitled Description, Installation, Usage, Contributing, and Tests
 
 WHEN choosing a _license_ for the application a  list of options is presented. 
 followed by a _badge_
 
 WHEN github, email or Url Links are presented you are able to follow the link.
 
-The new **README.md** file is generated in its perspective folder (ie: the utils/dist)
+The new ***README.md*** file is generated in its perspective folder (ie: the utils/dist)
+
+**https://github.com/VSLG2020/ReadMeGenerator.git**
+Repository Link
+
+**https://github.com/VSLG2020**
+Github Link
