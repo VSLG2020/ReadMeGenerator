@@ -1,155 +1,163 @@
-//node modules
+
 const fs = require('fs');
 const inquirer = require('inquirer');
+const markdownGen = require('./Develop/utils/markdownGen');
+const generateSite = require('./Develop/utils/generateSite');
 //const { title } = require('process');
-const path = require('path')
-const markdownGen = require('./Develop/utils/markdownGen')
-const generatePage = require('./src/page-template');
+ const path = require('path');
+
 
 //inquirer to generate questions
-var questions =
-    [
-        {
-            type: 'input',
-            message: 'What is the project title?',
-            name: 'name',
-            validate: nameInput => {
-                if (nameInput) {
-                    return true;
-                } else {
-                    return false;
+const promptQuestions = () => {
+    return inquirer
+    .prompt([
+        
+            {
+                type: 'input',
+                name: 'title',
+                message: 'What Is The Project Title?',
+                validate: titleInput => {
+                    if (titleInput) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
-            }
-        },
-        {
-            type: 'confirm',
-            name: 'confirmAbout',
-            message: 'Would You Like To Enter A Description Regarding Your Project?',
-            default: true
-        },
-        {
-            type: 'input',
-            message: 'Please Enter A Description of Your Project',
-            name: 'about',
-            when: ({ confirmAbout }) => confirmAbout
-        },
-        {
-            type: 'confirm',
-            name: 'confirmInstall',
-            message: 'Would You Like To Enter An Istallation Guide Regarding Your Project?',
-            default: true
-        },
-        {
-            type: 'input',
-            message: 'Please Enter Your Projects Installation Instructions for the User',
-            name: 'install',
-            when: ({ confirmInstall }) => confirmInstall
-        },
-        {
-            type: 'checkbox',
-            name: 'languages',
-            message: 'What did you build this project with? (Check all that apply)',
-            choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
-          },
-        {
-            type: 'input',
-            message: 'What is your email?',
-            name: 'email',
-            validate: emailInput => {
-                if (emailInput) {
-                    return true;
-                } else {
-                    return false;
+            },
+            {
+                type: 'confirm',
+                name: 'confirmDescription',
+                message: ' You Must Enter A Description Regarding Your Project. Press Enter.',
+                default: true
+            },
+            {
+                type: 'input',
+                name: 'description',
+                message: 'Please Enter A Description of Your Project Here:',
+                when: ({ confirmDescription }) => confirmDescription,
+                validate: descriptionInput => {
+                    if (descriptionInput) {
+                        return true;
+                    }else{
+                        return false;
+                    }
                 }
+            },
+            {
+                type: 'confirm',
+                name: 'confirmInstall',
+                message: 'Would You Like To Enter An Istallation Guide Regarding Your Project?',
+                default: true
+            },
+            {
+                type: 'input',
+                name: 'install',
+                message: 'Please Enter Your Projects Installation Instructions for the User',
+                when: ({ confirmInstall }) => confirmInstall
+            },
+            {
+                type: 'checkbox',
+                name: 'languages',
+                message: 'What did you build this project with? (Check all that apply)',
+                choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: 'What is your email?',
+                validate: emailInput => {
+                    if (emailInput) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'github',
+                message: 'Enter the GitHub link to your project. (Required)',
+                validate: github => {
+                    if (github) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'list',
+                name: 'license',
+                message: 'What is your license?',
+                choices: ['MIT', 'APACHE 2.0', 'GPL 3.0', 'BSD 3', 'None']
             }
-        },
-        {
-            type: 'input',
-            name: 'link',
-            message: 'Enter the GitHub link to your project. (Required)',
-            validate: linkInput => {
-              if (linkInput) {
-                return true;
-              } else {
-                return false;
-              }
+        
+    ])
+    .then((promptData) => {
+     
+        writeToFile("README.md",markdownGen({...promptData})) 
+        promptImage()
+       
+        
+    }
+    )
+};
+const promptImage = imageData => {
+    console.log('ADD IMAGE LINK');
+    // if (!imageData) {
+        imageData = [];
+    // }
+    return inquirer
+        .prompt([
+            {
+                type: "confirm",
+                name: "confirmImage",
+                message: "Would You Like To Add Images To Your README.MD Description?",
+                default: false,
+            },
+            {
+                type: "input",
+                name: "images",
+                message: "Please Enter A Link To Your Image Here:",
+                when: ({ confirmImage }) => confirmImage,
+            },
+        ])
+        .then(projectAssets => {
+            imageData.push(projectAssets);
+            if (projectAssets.images) {
+                return promptImage(imageData);
+            } else {
+                return imageData;
             }
-          },
-        {
-            type: 'list',
-            message: 'What is your license?',
-            name: 'license',
-            choices: ['MIT', 'APACHE 2.0', 'GPL 3.0', 'BSD 3', 'None']
-        }
-    ]
+        });
 
 
-function writeToFile(fileName, data) {
-    return fs.writeFileSync(path.join(process.cwd(), fileName), data)
+};
+
+function writeToFile(fileName, data){
+    return fs.writeFileSync(path.join(process.cwd(),fileName), data)
 }
-function runApp() {
-    inquirer.prompt(questions).then(function (responses) {
-        writeToFile('README.md', markdownGen({
-            ...responses
-        }))
+
+promptQuestions()
+    // .then(promptImage)
+    .then(imageData => {
+        return generateSite(imageData);
     })
-}
-runApp()
 
+
+    .then((promptData) => {
+        writeToFile("README.md",markdownGen({...promptData}).toString()) 
+    }
+    )
+    // .then((readmeFile) => {
+    //    writeToFile("README.md",markdownGen(readmeFile))
+    // }
     // )
-// //write the user response into a new file
-// .then(([
-//     {
-//         title,
-//         installation,
-//         instructions,
-//         credit,
-//         license,
-//         git,
-//         linkedin,
-//         email,
-//         usage,
-//         contribution
-//     }]
+    .catch(err => {
+        console.log(err);
+    }
+    );
 
-// ) => {
-//     const template = `# ${title},
+    // function runApp() {}
 
-//     * [Installation](#installation)
-//     * [Usage](#usage)
-//     * [Contribution](#contribution)
-//     * [Credits] (#credits)
-//     * [License](#license)
-//     * Installation
-//     ${installation}
-//     ## Usage
-//     ${Usage}
-//     ## Contribution
-//     ${contribution}
-//     ### instructions
-//     ${instructions}
-//     ## Credits
-//     ${credits}
-//     ## License
-//     ${license}
-
-//     # Contact
-//     * GitHub :${git}
-//     * Linkedin :${linkedin}
-//     * E-mail :${email}`;
-//     //
-//     // create new file function
-// createNewFile(title, template);
-// });
-
-// function createNewFile(filename,data){
-
-
-//     fs.writeFile(`./${filename.toLowerCase().split(' ').join('_')}.md`, JSON.stringify(data, null, '\t'), function(err) {
-//         if(err) {
-//             return console.log(err);
-//         }
-//         console.log('Success!');
-//     });
-
-// };
+    // runApp();
