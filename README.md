@@ -33,3 +33,6 @@ Repository Link
 
 **https://github.com/VSLG2020**
 Github Link
+
+VIDEO RECORDING OF FUNCTIONALITY
+**https://drive.google.com/file/d/1ku0sWZ5yK-NBTa0jBl4i8GsOLVHuMiIB/view**
